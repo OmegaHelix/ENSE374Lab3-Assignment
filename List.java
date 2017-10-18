@@ -15,17 +15,16 @@ public class List
 
     public void addElement(ListElement le)
     {
-        if(this.tail == this.head)
+        if(this.head == null)
         {
             this.head = le;
-            this.tail = le;
+            this.tail = this.head;
         }
         else
         {
-        ListElement oldTail = this.tail;
-        this.tail = le;
-        le.setPrevious(oldTail);
+        le.setPrevious(this.tail);
         le.setNext(null);
+        this.tail = le;
         }
     }
 
@@ -41,6 +40,7 @@ public class List
 
     public ListElement deleteElement(int index)
     {
+        
         ListElement pointer = this.head;
         for(int i = 0; i < index; i++)
         {
@@ -59,13 +59,26 @@ public class List
     {
        ListElement pointer = this.head;
        String list = new String();
-        while(pointer != tail)
+        while(pointer != this.tail)
         {
             list +=  pointer.getData() + ", " ;   
             pointer = pointer.getNext();
         }
         //accomodates the tail
-        list += ", " + pointer.getData();   
+        list +=  pointer.getData() + ", " ;    
+        System.out.print(list);
+    }
+    public void printLinkedListFromTail()
+    {
+       ListElement pointer = this.tail;
+       String list = new String();
+        while(pointer != this.head)
+        {
+            list +=  pointer.getData() + ", " ;   
+            pointer = pointer.getPrevious();
+        }
+        //accomodates the head
+        list +=  pointer.getData() + ", " ;    
         System.out.print(list);
     }
 
@@ -85,6 +98,7 @@ public class List
         ListElement newelement = new ListElement();
         newelement.setData(5);
         testlist.addElement(newelement);
+        testlist.deleteElement(0);
         testlist.printLinkedListFromHead();
     } 
 
