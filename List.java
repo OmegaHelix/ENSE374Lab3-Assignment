@@ -15,18 +15,17 @@ public class List
 
     public void addElement(ListElement le)
     {
-        if(this.tail == this.head)
+        if(this.head == null)
         {
             this.head = le;
+            this.tail = this.head;
+        }
+        else 
+        {
+            this.tail.setNext(le);
             this.tail = le;
         }
-        else
-        {
-        ListElement oldTail = this.tail;
-        this.tail = le;
-        le.setPrevious(oldTail);
-        le.setNext(null);
-        }
+
     }
 
     public ListElement getElement(int index)
@@ -42,21 +41,37 @@ public class List
     public ListElement deleteElement(int index)
     {
         ListElement pointer = this.head;
+        ListElement temp = pointer;
         for(int i = 0; i < index; i++)
         {
+            temp = pointer;
             pointer = pointer.getNext();
         }
-        ListElement last = pointer.getPrevious();
-        ListElement next = pointer.getNext();
-        last.setNext(next);
-        next.setPrevious(last);
-        ListElement temp = pointer;    
-        pointer = null;
+        if (pointer == this.head && pointer == this.tail)
+        {
+                this.tail = null;
+                this.head = null;
+                pointer = null;
+        }
+        else if(pointer == head)
+        {
+            this.head = this.head.getNext();
+            pointer = null;
+        }
+        else
+        {
+            temp.setNext(pointer.getNext());
+            temp = pointer;    
+            pointer = null;
+           
+        }
         return temp;
     }
 
     public void printLinkedListFromHead()
     {
+        if(this.head == null)
+        return;
        ListElement pointer = this.head;
        String list = new String();
         while(pointer != tail)
@@ -65,7 +80,7 @@ public class List
             pointer = pointer.getNext();
         }
         //accomodates the tail
-        list += ", " + pointer.getData();   
+        list += pointer.getData() + ", ";   
         System.out.print(list);
     }
 
@@ -83,8 +98,14 @@ public class List
     {
         List testlist = new List();
         ListElement newelement = new ListElement();
+        ListElement element2 = new ListElement();
         newelement.setData(5);
         testlist.addElement(newelement);
+        testlist.deleteElement(0);
+        newelement.setData(8);
+        testlist.addElement(newelement);
+        element2.setData(12);
+        testlist.addElement(element2);
         testlist.printLinkedListFromHead();
     } 
 
