@@ -19,6 +19,17 @@ public class List
         this.tail = this.tail.getNext();
     }
 
-    
+    public ListElement getElement(int index)
+    {
+        ListElement pointer = this.head;
+        for(int i = 0; i < index; i++)
+        {
+            pointer = pointer.getNext();
+        }
+        return pointer;
+    }
+
+
+
 
 }
