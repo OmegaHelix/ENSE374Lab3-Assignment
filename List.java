@@ -102,6 +102,7 @@ public class List
     {
         if(this.tail == null)
         return;
+        
        ListElement pointer = this.tail;
        String list = new String();
         while(pointer != this.head)
