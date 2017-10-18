@@ -29,7 +29,21 @@ public class List
         return pointer;
     }
 
-
+    public ListElement deleteElement(int index)
+    {
+        ListElement pointer = this.head;
+        for(int i = 0; i < index; i++)
+        {
+            pointer = pointer.getNext();
+        }
+        ListElement last = pointer.getLast();
+        ListElement next = pointer.getNext();
+        last.setNext(next);
+        next.setLast(last);
+        ListElement temp = pointer;    
+        pointer = null;
+        return temp;
+    }
 
 
 }
