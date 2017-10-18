@@ -40,23 +40,53 @@ public class List
 
     public ListElement deleteElement(int index)
     {
-        
         ListElement pointer = this.head;
+        ListElement temp = pointer;
         for(int i = 0; i < index; i++)
         {
+            temp = pointer;
             pointer = pointer.getNext();
         }
-        ListElement last = pointer.getPrevious();
-        ListElement next = pointer.getNext();
-        last.setNext(next);
-        next.setPrevious(last);
-        ListElement temp = pointer;    
-        pointer = null;
+        // if one element in list, or empty
+        if (pointer == this.head && pointer == this.tail)
+        {
+            temp = pointer; 
+                this.tail = null;
+                this.head = null;
+                pointer = null;
+        }
+        //if element is head, we need to update head
+        else if(pointer == head)
+        {
+            temp = pointer; 
+            this.head = this.head.getNext();
+            pointer = null;
+        }
+        // if in body of list
+        else if(pointer != tail)
+        {
+            pointer.getNext().setPrevious(temp);
+            pointer.getPrevious().setNext(pointer.getNext());
+            temp = pointer;    
+            pointer = null;
+           
+        }
+        // if tail of list
+        else
+        {
+            temp = pointer; 
+            pointer.getPrevious().setNext(null);
+            this.tail = tail.getPrevious();
+            
+        }
         return temp;
     }
 
+
     public void printLinkedListFromHead()
     {
+        if(this.head == null)
+        return ;
        ListElement pointer = this.head;
        String list = new String();
         while(pointer != this.tail)
@@ -70,6 +100,8 @@ public class List
     }
     public void printLinkedListFromTail()
     {
+        if(this.tail == null)
+        return;
        ListElement pointer = this.tail;
        String list = new String();
         while(pointer != this.head)
@@ -99,7 +131,10 @@ public class List
         newelement.setData(5);
         testlist.addElement(newelement);
         testlist.deleteElement(0);
+        newelement.setData(12);
+        testlist.addElement(newelement);
         testlist.printLinkedListFromHead();
+        testlist.printLinkedListFromTail();
     } 
 
 }
