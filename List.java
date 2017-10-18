@@ -13,7 +13,12 @@ public class List
     
     }
 
-    
+    public void addElement(ListElement le)
+    {
+        this.tail.setNext(le);
+        this.tail = this.tail.getNext();
+    }
 
+    
 
 }
