@@ -15,11 +15,18 @@ public class List
 
     public void addElement(ListElement le)
     {
-        
-        this.tail.setNext(le);
-        this.tail.getNext().setPrevious(this.tail);
-        this.tail = this.tail.getNext();
-
+        if(this.tail == this.head)
+        {
+            this.head = le;
+            this.tail = le;
+        }
+        else
+        {
+        ListElement oldTail = this.tail;
+        this.tail = le;
+        le.setPrevious(oldTail);
+        le.setNext(null);
+        }
     }
 
     public ListElement getElement(int index)
@@ -54,7 +61,7 @@ public class List
        String list = new String();
         while(pointer != tail)
         {
-            list += ", " + pointer.getData();   
+            list +=  pointer.getData() + ", " ;   
             pointer = pointer.getNext();
         }
         //accomodates the tail
@@ -76,7 +83,9 @@ public class List
     {
         List testlist = new List();
         ListElement newelement = new ListElement();
+        newelement.setData(5);
         testlist.addElement(newelement);
+        testlist.printLinkedListFromHead();
     } 
 
 }
