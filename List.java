@@ -1,4 +1,4 @@
-import ListElement.java;
+import java.*;
 
 public class List
 {
@@ -15,8 +15,11 @@ public class List
 
     public void addElement(ListElement le)
     {
-        this.tail.setNext(le);
+        
+        this.tail.setNext(new ListElement(le));
+        this.tail.getNext().setPrevious(this.tail);
         this.tail = this.tail.getNext();
+
     }
 
     public ListElement getElement(int index)
@@ -36,10 +39,10 @@ public class List
         {
             pointer = pointer.getNext();
         }
-        ListElement last = pointer.getLast();
+        ListElement last = pointer.getPrevious();
         ListElement next = pointer.getNext();
         last.setNext(next);
-        next.setLast(last);
+        next.setPrevious(last);
         ListElement temp = pointer;    
         pointer = null;
         return temp;
@@ -56,7 +59,17 @@ public class List
         }
         //accomodates the tail
         list += ", " + pointer.getData();   
-        println(list);
+        System.out.print(list);
+    }
+
+    public ListElement getHead()
+    {
+        return this.head;
+    }
+
+    public ListElement getTail()
+    {
+        return this.tail;
     }
 
 
