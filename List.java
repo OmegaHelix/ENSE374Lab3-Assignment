@@ -1,4 +1,4 @@
-import java.*;
+import java.util.*;
 
 public class List
 {
@@ -16,7 +16,7 @@ public class List
     public void addElement(ListElement le)
     {
         
-        this.tail.setNext(new ListElement(le));
+        this.tail.setNext(le);
         this.tail.getNext().setPrevious(this.tail);
         this.tail = this.tail.getNext();
 
@@ -72,5 +72,13 @@ public class List
         return this.tail;
     }
 
+    public static void main(String [ ] args)
+    {
+        List testlist = new List();
+        ListElement newelement = new ListElement();
+        testlist.addElement(newelement);
+    } 
 
 }
+
+
