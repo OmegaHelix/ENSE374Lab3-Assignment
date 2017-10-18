@@ -45,5 +45,19 @@ public class List
         return temp;
     }
 
+    public void printLinkedListFromHead()
+    {
+       ListElement pointer = this.head;
+       String list = new String();
+        while(pointer != tail)
+        {
+            list += ", " + pointer.getData();   
+            pointer = pointer.getNext();
+        }
+        //accomodates the tail
+        list += ", " + pointer.getData();   
+        println(list);
+    }
+
 
 }
